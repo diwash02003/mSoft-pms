@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created On : 2025 02 Jan 5:28 PM
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * Description:
  **/
 @Data
+@Entity
 @Table(name = "super_admin")
 public class SuperAdmin {
     @Id
@@ -36,4 +38,7 @@ public class SuperAdmin {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "superAdmin")
+    private List<Company> companyList;
 }
