@@ -50,6 +50,10 @@ public class Company {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    @JoinColumn(name = "super_admin_id", nullable = false)
+    private SuperAdmin superAdmin;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
