@@ -41,4 +41,4 @@ public class CompanySubscription {
     @JoinColumn(name = "subscription_id", insertable = false, updatable = false)
     private SubscriptionPlan subscriptionPlan;
 }
-}
+
