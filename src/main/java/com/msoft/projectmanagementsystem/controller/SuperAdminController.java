@@ -1,5 +1,6 @@
 package com.msoft.projectmanagementsystem.controller;
 
+import com.msoft.projectmanagementsystem.Exception.customException;
 import com.msoft.projectmanagementsystem.model.Company;
 import com.msoft.projectmanagementsystem.model.SuperAdmin;
 import com.msoft.projectmanagementsystem.service.CompanyService;
@@ -35,7 +36,7 @@ public class SuperAdminController {
             SuperAdmin admin = superAdminService.createAdmin(superAdmin);
             return new ResponseEntity<>(admin, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new SuperAdminException("Error creating superAdmin: " + e.getMessage());
+            throw new customException("Error creating superAdmin: " + e.getMessage());
         }
     }
 
@@ -45,7 +46,7 @@ public class SuperAdminController {
             SuperAdmin admin = superAdminService.updateAdmin(id, updateSuperAdmin);
             return new ResponseEntity<>(admin, HttpStatus.OK);
         } catch (Exception e) {
-            throw new SuperAdminException("Error Updating super admin" + e.getMessage());
+            throw new customException("Error Updating super admin" + e.getMessage());
         }
     }
 
@@ -61,7 +62,7 @@ public class SuperAdminController {
             }
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new SuperAdminException("Error processing company information: " + e.getMessage());
+            throw new customException("Error processing company information: " + e.getMessage());
         }
     }
 
