@@ -18,8 +18,8 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(SuperAdminException.class)
-    public ResponseEntity<String> handleSuperAdminException(SuperAdminException ex) {
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<String> handleSuperAdminException(CustomException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
