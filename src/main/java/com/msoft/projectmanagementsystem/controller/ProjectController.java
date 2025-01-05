@@ -5,10 +5,9 @@ import com.msoft.projectmanagementsystem.model.Project;
 import com.msoft.projectmanagementsystem.service.ProjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created On : 2025 05 Jan 11:56 AM
@@ -26,14 +25,27 @@ public class ProjectController {
     }
 
 
-    @PostMapping("addProject")
+    @PostMapping()
     public ResponseEntity<Project> addProject(@RequestBody Project project) {
         try {
-            Project project = projectService.addProject(project)
-            return new ResponseEntity<>(project, HttpStatus.CREATED);
+            Project newProject = projectService.addProject(project);
+            return new ResponseEntity<>(newProject, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new customException("Error creating project: " + e.getMessage());
+            throw new CustomException("Error creating project: " + e.getMessage());
         }
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Project>> getAllProjects() {
+
+        List<Project> projects = projectService.getProjects();
+        return projects != null ? ResponseEntity.ok(projects) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+        Project project = projectService.getProjectById(id);
+        return project != null ? ResponseEntity.ok(project) : ResponseEntity.notFound().build();
     }
 
 
