@@ -21,4 +21,16 @@ public class SuperAdminService {
         return superAdminRepo.save(superAdmin);
     }
 
+    public SuperAdmin updateAdmin(Long id, SuperAdmin updatedSuperAdmin) {
+        return superAdminRepo.findById(id)
+                .map(existingAdmin -> {
+                    existingAdmin.setFullName(updatedSuperAdmin.getFullName());
+                    existingAdmin.setEmail(updatedSuperAdmin.getEmail());
+                    existingAdmin.setPassword(updatedSuperAdmin.getPassword());
+                    return superAdminRepo.save(existingAdmin);
+                })
+                .orElseThrow(() -> new SuperAdminNotFoundException("SuperAdmin with id " + id + " not found"));
+    }
+
 }
+
