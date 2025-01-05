@@ -25,6 +25,7 @@ public class ProjectController {
     }
 
 
+    //to create a new Project in the company
     @PostMapping()
     public ResponseEntity<Project> addProject(@RequestBody Project project) {
         try {
@@ -35,6 +36,7 @@ public class ProjectController {
         }
     }
 
+    //to fetch the all project
     @GetMapping()
     public ResponseEntity<List<Project>> getAllProjects() {
 
@@ -42,10 +44,37 @@ public class ProjectController {
         return projects != null ? ResponseEntity.ok(projects) : ResponseEntity.notFound().build();
     }
 
+
+    //to fetch the project with their respective projectId
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
         Project project = projectService.getProjectById(id);
         return project != null ? ResponseEntity.ok(project) : ResponseEntity.notFound().build();
+    }
+
+
+    //to update the project details with the help of projectId
+    @PutMapping("/{id}")
+    public ResponseEntity<Project> updateSuperAdmin(@PathVariable Long id, @RequestBody Project updateProject) {
+        try {
+            Project project = projectService.updateProject(id, updateProject);
+            return new ResponseEntity<>(project, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new CustomException("Error Updating project" + e.getMessage());
+        }
+    }
+
+
+
+    //to delete the whole project  by the database
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProject(@PathVariable Long id) {
+        boolean isDeleted = projectService.deleteProject(id);
+        if (isDeleted) {
+            return ResponseEntity.ok("Project deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Project not found.");
+        }
     }
 
 
