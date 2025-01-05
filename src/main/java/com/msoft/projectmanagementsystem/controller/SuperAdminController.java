@@ -1,6 +1,6 @@
 package com.msoft.projectmanagementsystem.controller;
 
-import com.msoft.projectmanagementsystem.Exception.customException;
+import com.msoft.projectmanagementsystem.Exception.CustomException;
 import com.msoft.projectmanagementsystem.model.Company;
 import com.msoft.projectmanagementsystem.model.SuperAdmin;
 import com.msoft.projectmanagementsystem.service.CompanyService;
@@ -40,6 +40,11 @@ public class SuperAdminController {
     @PostMapping("/createOrUpdateAdmin")
     public ResponseEntity<SuperAdmin> createOrUpdateAdmin(@RequestBody SuperAdmin superAdmin) {
         try {
+
+            // Validate that the password is not null or empty
+            if (superAdmin.getPassword() == null || superAdmin.getPassword().isEmpty()) {
+                throw new CustomException("Password must not be null or empty.");
+            }
             SuperAdmin result;
 
             // Check if superAdminId is present (update case)
@@ -52,7 +57,7 @@ public class SuperAdminController {
 
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
-            throw new customException("Error processing super admin information: " + e.getMessage());
+            throw new CustomException("Error processing super admin information: " + e.getMessage());
         }
     }
 
@@ -74,7 +79,7 @@ public class SuperAdminController {
             }
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } catch (Exception e) {
-            throw new customException("Error processing company information: " + e.getMessage());
+            throw new CustomException("Error processing company information: " + e.getMessage());
         }
     }
 
