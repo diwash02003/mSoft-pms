@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * Description:
  **/
 @Entity
-public class Projects {
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
