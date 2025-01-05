@@ -1,6 +1,6 @@
 package com.msoft.projectmanagementsystem.controller;
 
-import com.msoft.projectmanagementsystem.Exception.customException;
+import com.msoft.projectmanagementsystem.Exception.CustomException;
 import com.msoft.projectmanagementsystem.model.Project;
 import com.msoft.projectmanagementsystem.service.ProjectService;
 import org.springframework.http.HttpStatus;
