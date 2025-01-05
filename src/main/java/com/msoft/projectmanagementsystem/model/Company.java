@@ -16,7 +16,7 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "company_id")
-    private long companyId;
+    private Long companyId;
 
     @Column(name = "company_name", nullable = false)
     private String companyName;
@@ -54,6 +54,7 @@ public class Company {
 
     @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Client> clients;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -65,11 +66,11 @@ public class Company {
         updatedAt = LocalDateTime.now();
     }
 
-    public long getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(long companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
@@ -164,7 +165,7 @@ public class Company {
         this.superAdmin = superAdmin;
     }
 
-    public Company(long companyId, String companyName, String email, String companyPassword, String phone, String address, String city, String state, Boolean isCompanyActive, LocalDateTime createdAt, LocalDateTime updatedAt, SuperAdmin superAdmin) {
+    public Company(Long companyId, String companyName, String email, String companyPassword, String phone, String address, String city, String state, Boolean isCompanyActive, LocalDateTime createdAt, LocalDateTime updatedAt, SuperAdmin superAdmin) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.email = email;

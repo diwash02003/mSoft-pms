@@ -39,13 +39,29 @@ public class SuperAdminController {
         }
     }
 
-    @PostMapping("/createCompany")
-    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
+    @PutMapping("{/id}")
+    public ResponseEntity<SuperAdmin> updateSuperAdmin(@PathVariable Long id, @RequestBody SuperAdmin updateSuperAdmin) {
         try {
-            Company createdCompany = companyService.createCompany(company);
-            return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+            SuperAdmin admin = superAdminService.updateAdmin(id, updateSuperAdmin);
+            return new ResponseEntity<>(admin, HttpStatus.OK);
         } catch (Exception e) {
-            throw new SuperAdminException("Error creating company: " + e.getMessage());
+            throw new SuperAdminException("Error Updating super admin" + e.getMessage());
+        }
+    }
+
+
+    @PostMapping("/createOrUpdateCompany")
+    public ResponseEntity<Company> createOrUpdateCompany(@RequestBody Company company) {
+        try {
+            Company result;
+            if (company.getCompanyId() != null) {
+                result = companyService.updateCompany(company.getCompanyId(), company);
+            } else {
+                result = companyService.createCompany(company);
+            }
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new SuperAdminException("Error processing company information: " + e.getMessage());
         }
     }
 

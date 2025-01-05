@@ -1,5 +1,6 @@
 package com.msoft.projectmanagementsystem.service;
 
+import com.msoft.projectmanagementsystem.Exception.customException;
 import com.msoft.projectmanagementsystem.model.Company;
 import com.msoft.projectmanagementsystem.repo.CompanyRepo;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,17 @@ public class CompanyService {
     public List<Company> getAllCompanies() {
         return companyRepo.findAll();
     }
+
+    public Company updateCompany(Long id, Company updatedCompany) {
+        return companyRepo.findById(id)
+                .map(existingCompany -> {
+                    existingCompany.setCompanyName(updatedCompany.getCompanyName());
+                    existingCompany.setAddress(updatedCompany.getAddress());
+                    existingCompany.setEmail(updatedCompany.getEmail());
+                    // Update other fields as needed
+                    return companyRepo.save(existingCompany);
+                })
+                .orElseThrow(() -> new customException("Company with id " + id + " not found"));
+    }
+
 }
