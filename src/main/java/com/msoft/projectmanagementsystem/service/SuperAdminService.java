@@ -1,5 +1,6 @@
 package com.msoft.projectmanagementsystem.service;
 
+import com.msoft.projectmanagementsystem.Exception.SuperAdminException;
 import com.msoft.projectmanagementsystem.model.SuperAdmin;
 import com.msoft.projectmanagementsystem.repo.SuperAdminRepo;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class SuperAdminService {
                     existingAdmin.setPassword(updatedSuperAdmin.getPassword());
                     return superAdminRepo.save(existingAdmin);
                 })
-                .orElseThrow(() -> new SuperAdminNotFoundException("SuperAdmin with id " + id + " not found"));
+                .orElseThrow(() -> new SuperAdminException("SuperAdmin with id " + id + " not found"));
     }
 
 }
