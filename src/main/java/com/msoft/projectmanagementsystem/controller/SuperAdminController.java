@@ -2,6 +2,8 @@ package com.msoft.projectmanagementsystem.controller;
 
 import com.msoft.projectmanagementsystem.Exception.SuperAdminException;
 import com.msoft.projectmanagementsystem.model.Company;
+import com.msoft.projectmanagementsystem.model.SuperAdmin;
+import com.msoft.projectmanagementsystem.service.CompanyService;
 import com.msoft.projectmanagementsystem.service.SuperAdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +22,28 @@ public class SuperAdminController {
 
     private final SuperAdminService superAdminService;
 
+    private final CompanyService companyService;
 
-    public SuperAdminController(SuperAdminService superAdminService) {
+
+    public SuperAdminController(SuperAdminService superAdminService, CompanyService companyService) {
         this.superAdminService = superAdminService;
+        this.companyService = companyService;
     }
 
-//    @PostMapping()
-//    public ResponseEntity<SuperAdmin> createAdmin(@RequestBody SuperAdmin superAdmin) {
-//        try {
-//            SuperAdmin admin = superAdminService.createAdmin(superAdmin);
-//            return new ResponseEntity<>(admin, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            throw new SuperAdminException("Error creating superAdmin: " + e.getMessage());
-//        }
-//    }
+    @PostMapping()
+    public ResponseEntity<SuperAdmin> createAdmin(@RequestBody SuperAdmin superAdmin) {
+        try {
+            SuperAdmin admin = superAdminService.createAdmin(superAdmin);
+            return new ResponseEntity<>(admin, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new SuperAdminException("Error creating superAdmin: " + e.getMessage());
+        }
+    }
 
     @PostMapping("/createCompany")
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
         try {
-            Company createdCompany = superAdminService.createCompany(company);
+            Company createdCompany = companyService.createCompany(company);
             return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new SuperAdminException("Error creating company: " + e.getMessage());
@@ -47,7 +52,7 @@ public class SuperAdminController {
 
     @GetMapping("/companies")
     public ResponseEntity<List<Company>> getAllCompanies() {
-        List<Company> companies = superAdminService.getAllCompanies();
+        List<Company> companies = companyService.getAllCompanies();
         if (companies.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
