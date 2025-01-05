@@ -51,11 +51,11 @@ public class SuperAdmin {
         this.superAdminId = superAdminId;
     }
 
-    public String gtPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String username) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
