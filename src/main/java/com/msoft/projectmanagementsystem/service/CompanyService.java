@@ -1,6 +1,6 @@
 package com.msoft.projectmanagementsystem.service;
 
-import com.msoft.projectmanagementsystem.Exception.SuperAdminException;
+import com.msoft.projectmanagementsystem.Exception.customException;
 import com.msoft.projectmanagementsystem.model.Company;
 import com.msoft.projectmanagementsystem.repo.CompanyRepo;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class CompanyService {
                     // Update other fields as needed
                     return companyRepo.save(existingCompany);
                 })
-                .orElseThrow(() -> new SuperAdminException("Company with id " + id + " not found"));
+                .orElseThrow(() -> new customException("Company with id " + id + " not found"));
     }
 
 }
