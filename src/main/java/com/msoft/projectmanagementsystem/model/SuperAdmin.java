@@ -22,8 +22,8 @@ public class SuperAdmin {
     @Column(name = "super_admin_id")
     private Long superAdminId;
 
-    @Column(nullable = false, length = 100)
-    private String username;
+    @Column(nullable = false, name = "company_password")
+    private String password;
 
     @Column(nullable = false, unique = true, length = 255)
     private String email;
@@ -50,12 +50,12 @@ public class SuperAdmin {
         this.superAdminId = superAdminId;
     }
 
-    public String getUsername() {
-        return username;
+    public String gtPassword() {
+        return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String username) {
+        this.password = password;
     }
 
     public String getEmail() {
