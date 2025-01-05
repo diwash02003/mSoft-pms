@@ -40,4 +40,11 @@ public class CompanyService {
                 .orElseThrow(() -> new CustomException("Company with id " + id + " not found"));
     }
 
+    public boolean deleteCompanyById(Long companyId) {
+        if (companyRepo.existsById(companyId)) {
+            companyRepo.deleteById(companyId);
+            return true;
+        }
+        return false;
+    }
 }
