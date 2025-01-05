@@ -23,7 +23,7 @@ public class SuperAdmin {
     @Column(name = "super_admin_id")
     private Long superAdminId;
 
-    @Column(nullable = false, name = "company_password")
+    @Column(nullable = false, name = "super_admin_password")
     private String password;
 
     @Column(nullable = false, unique = true, length = 255)
