@@ -11,7 +11,8 @@ import java.util.List;
 /**
  * Created On : 2025 02 Jan 5:28 PM
  * Author : Diwash Pokhrel
- * Description:
+ * Description: This entity represents the Super Admin of the project management system.
+ * The Super Admin has unique credentials, manages multiple companies, and has a list of associated companies.
  **/
 @Entity
 @Data
