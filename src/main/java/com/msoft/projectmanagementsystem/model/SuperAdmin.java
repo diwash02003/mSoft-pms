@@ -13,8 +13,8 @@ import java.util.List;
  * Author : Diwash Pokhrel
  * Description:
  **/
-@Data
 @Entity
+@Data
 @Table(name = "super_admin")
 public class SuperAdmin {
     @Id
@@ -39,6 +39,54 @@ public class SuperAdmin {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "superAdmin")
+    @OneToMany(mappedBy = "superAdmin", fetch = FetchType.EAGER)
     private List<Company> companyList;
+
+    public Long getSuperAdminId() {
+        return superAdminId;
+    }
+
+    public void setSuperAdminId(Long superAdminId) {
+        this.superAdminId = superAdminId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
