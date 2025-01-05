@@ -1,5 +1,8 @@
 package com.msoft.projectmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created On : 2025 02 Jan 5:29 PM
@@ -19,7 +23,7 @@ import java.time.LocalDateTime;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long clientId;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -40,6 +44,9 @@ public class Client {
     @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "fk_client_company"))
     private Company company;
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Project> projects;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -57,12 +64,12 @@ public class Client {
         updatedAt = LocalDateTime.now();
     }
 
-    public Long getId() {
-        return id;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public String getEmail() {
@@ -105,14 +112,6 @@ public class Client {
         this.clientCompanyName = clientCompanyName;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -129,18 +128,4 @@ public class Client {
         this.updatedAt = updatedAt;
     }
 
-    public Client() {
-    }
-
-    public Client(Long id, String email, String password, String firstName, String lastName, String clientCompanyName, Company company, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.clientCompanyName = clientCompanyName;
-        this.company = company;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 }
