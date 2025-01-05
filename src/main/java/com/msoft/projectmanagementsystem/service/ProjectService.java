@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
  * Description:
  **/
 @Service
-public class ProjectsService {
+public class ProjectService {
 }

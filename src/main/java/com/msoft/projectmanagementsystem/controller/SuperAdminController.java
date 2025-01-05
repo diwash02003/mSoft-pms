@@ -1,6 +1,5 @@
 package com.msoft.projectmanagementsystem.controller;
 
-import com.msoft.projectmanagementsystem.Exception.SuperAdminException;
 import com.msoft.projectmanagementsystem.model.Company;
 import com.msoft.projectmanagementsystem.model.SuperAdmin;
 import com.msoft.projectmanagementsystem.service.CompanyService;
