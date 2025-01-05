@@ -52,8 +52,10 @@ public class Company {
     @JoinColumn(name = "super_admin_id", foreignKey = @ForeignKey(name = "fk_company_id"))
     private SuperAdmin superAdmin;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Client> clients;
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Project> projects;
 
     @PrePersist
     protected void onCreate() {
@@ -154,29 +156,12 @@ public class Company {
         this.updatedAt = updatedAt;
     }
 
-    public Company() {
-    }
 
     public SuperAdmin getSuperAdmin() {
         return superAdmin;
     }
 
     public void setSuperAdmin(SuperAdmin superAdmin) {
-        this.superAdmin = superAdmin;
-    }
-
-    public Company(Long companyId, String companyName, String email, String companyPassword, String phone, String address, String city, String state, Boolean isCompanyActive, LocalDateTime createdAt, LocalDateTime updatedAt, SuperAdmin superAdmin) {
-        this.companyId = companyId;
-        this.companyName = companyName;
-        this.email = email;
-        this.companyPassword = companyPassword;
-        this.phone = phone;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.isCompanyActive = isCompanyActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.superAdmin = superAdmin;
     }
 }

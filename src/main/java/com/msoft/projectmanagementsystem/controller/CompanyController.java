@@ -35,9 +35,9 @@ public class CompanyController {
     public ResponseEntity<List<Client>> getClientsByCompanyId(@PathVariable Long companyId){
         try {
             List<Client> clientList = clientService.getClientsByCompanyId(companyId);
-            return new ResponseEntity<>(clientList, HttpStatus.CREATED);
+            return new ResponseEntity<>(clientList, HttpStatus.OK);
         }catch(Exception e){
-            throw new CustomException("Error Fetching Cilent: "+e.getMessage());
+            throw new CustomException("Error Fetching Client: "+e.getMessage());
         }
     }
 
